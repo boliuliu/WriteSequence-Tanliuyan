@@ -1,0 +1,25 @@
+package mySequenceAlignment;
+
+public class MainSequenceAlignment {
+	public static void main(String[] args) {
+		
+	long start=System.currentTimeMillis(); //获取开始时间
+	
+	
+		String A = WriteSequences.getRandomSequnce(6);
+		String B = WriteSequences.getRandomSequnce(6);
+		System.out.println(" SEQUENCE ALIGNMENT ALGORITHM \n");
+		System.out.println(" INPUT:\n\n" +A);
+		System.out.println(B + "\n");
+		
+		String[] alignedSqs= DPA.getAlignedSequences(A, B);//Dynamic programming algorithm
+		//String[] alignedSqs= DACA.getAlignedSequences(A, B);//Divide-and-conquer algorithm
+		
+		System.out.println("\n>> OUTPUT:\n");
+		for(String s : alignedSqs){
+			System.out.println(s);
+		}
+		long end=System.currentTimeMillis(); //获取结束时间
+		System.out.println("程序运行时间： "+(end-start)+"ms");
+	}
+}
