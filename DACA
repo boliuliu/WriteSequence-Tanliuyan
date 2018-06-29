@@ -1,0 +1,63 @@
+package mySequenceAlignment;
+
+public class DACA {//Divide-and-Conquer Algorithm
+	private static int opt(int i, int j, int m, int n, String sqA, String sqB){
+		int penalty = 0;
+		int x;
+		if(i == m)
+			return 2*(n-j);
+		else if(j == n)
+			return 2*(m-i);
+		else {
+			if(sqA.charAt(i) != sqB.charAt(j))
+				penalty = 1;
+			x = Math.min(opt(i+1, j+1, m, n, sqA, sqB)+penalty, Math.min(opt(i+1, j, m, n,  sqA, sqB)+2, opt(i, j+1, m, n,  sqA, sqB)+2));
+			//System.out.println(x);
+			return x;
+		}
+	}
+	
+	public static String[] getAlignedSequences(String A, String B){
+		int m = A.length(); int n = B.length();
+		int penalty=0;
+		int k=0; int l=0;
+		int i=0,j =0;
+		//int AllPenalty = opt(0, 0, m, n, A, B);
+		
+		String[] align = new String[2];
+		align[0]=""; align[1]="";
+		
+		while(i<m || j<n){
+			System.out.println(i);
+			if((i == m-1) && (j != n-1)){
+				align[1]=align[1]+"_";
+				j++;
+			}
+			else if((j == n-1) && (i != m-1)){
+				align[0]=align[0]+"_";
+				i++;
+			}
+			else{
+				if(A.charAt(i) != B.charAt(j))
+					penalty = 1;
+				if(opt(i, j, m, n, A, B) == opt(i+1, j, m, n, A, B)+2){
+					align[0] = align[0] + A.charAt(k++);
+					align[1] = align[1] + "_";
+					i++;
+					System.out.println(align[0]);
+				} else if (opt(i, j, m, n, A, B) == opt(i, j+1, m, n, A, B)+2){
+					align[0] = align[0] + "_";
+					align[1] = align[1] + B.charAt(l++);
+					j++;
+					System.out.println(align[0]);
+				} else{
+					align[0] = align[0] + A.charAt(k++);
+					align[1] = align[1] + B.charAt(l++);
+					i++; j++;
+					System.out.println(align[0]);
+				}
+			}
+		}
+		return align;
+	}
+}
