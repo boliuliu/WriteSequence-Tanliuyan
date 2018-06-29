@@ -1,0 +1,50 @@
+package mySequenceAlignment;
+
+//import java.io.FileWriter;
+//import java.io.IOException;
+import java.util.Random;
+public class WriteSequences {
+	private static final int NumA = 4;
+	private static final int NumB = 4;
+	
+	static String A = "";
+	static String B = "";
+	
+	public static String getRandomSequnce(int num){
+		String temp="";
+		Random rand = new Random();
+		for(int i=0; i<num; i++){
+			int x = rand.nextInt(4);//ATCG
+			switch(x){
+			case 0:
+				temp = temp + "A";
+				break;
+			case 1:
+				temp = temp + "T";
+				break;
+			case 2:
+				temp = temp + "C";
+				break;
+			case 3:
+				temp = temp + "G";
+				break;
+			}
+		}
+		return temp;
+	}
+	/*
+	public static void writeFile() {
+		A = getRandomSequnce(NumA);
+		B = getRandomSequnce(NumB);
+		
+        String fileName="./input.txt";
+        try {
+                FileWriter writer=new FileWriter(fileName);
+                writer.write(A + "\n");
+                writer.write(B + "\n");
+                writer.close();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }*/
+}
+	
